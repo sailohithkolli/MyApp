@@ -1,0 +1,23 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Build the app
+        run: npm run build
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v1
+        with:
+          token: ${{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}}
+          create_release: true
+          publish_branch: gh-pages
+          folder: build
+
